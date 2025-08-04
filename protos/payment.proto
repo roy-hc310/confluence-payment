@@ -1,0 +1,20 @@
+syntax = "proto3";
+option go_package = "core-internal/proto;payment_proto";
+package payment_proto;
+
+
+message CreatePaymentRequest {
+    string orderID = 1;
+    string shopID = 2;
+    string customerID = 3;
+    double amount = 4;
+}
+
+message CreatePaymentResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+service PaymentProto {
+    rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse);
+}

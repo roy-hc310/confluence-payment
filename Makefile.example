@@ -1,0 +1,17 @@
+run:
+	go run main.go
+
+create_migrate_file:
+	migrate create -ext sql -dir ./core/sqlc/migrations -seq init_tables
+
+migrate_up:
+	migrate -database "postgres://postgres:admin@localhost:5432/pyre?sslmode=disable&search_path=promotion" -path core-internal/migrations up
+
+migrate_force:
+	migrate -database "postgres://postgres:admin@localhost:5432/pyre?sslmode=disable&search_path=promotion" -path core-internal/migrations force
+
+migrate_down:
+	migrate -database "postgres://postgres:admin@localhost:5432/pyre?sslmode=disable&search_path=promotion" -path core-internal/migrations down
+
+generate_proto:
+	protoc --plugin=protoc-gen-ts_proto=".\\node_modules\\.bin\\protoc-gen-ts_proto.cmd" --ts_proto_out=./src ./proto/invoicer.proto

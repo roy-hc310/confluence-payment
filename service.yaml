@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: confluence-payment-service
+  namespace: dev
+spec:
+  selector:
+    app: confluence-payment-pod
+  ports:
+    - protocol: TCP
+      port: 80 # Service port
+      targetPort: 8000 # Pod container port
+  type: LoadBalancer
